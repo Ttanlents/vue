@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<body>
+    <div id="div">
+        <my-click></my-click>
+        <my-click :count="5"></my-click>
+    </div>
+</body>
+<!--全局，局部
+1.声明vue组件
+2.引入组件
+3.页面直接使用组件名标签
+-->
+<script src="js/jquery.js"></script>
+<script src="js/vue.js"></script>
+<script>
+    let vm=new Vue({
+    el:'#div',
+    data:{
+
+    },
+    methods:{
+
+    },
+    components:{
+
+        /* * 命名xxx-xxx
+         * 组件可以多复用
+         *!*/
+        'my-click':{
+            props:['count'], //传参进来
+            data:function () {
+                //采用回调形式，避免组件复用时共用数据，这样不会共用data数据
+             return {vueCount:0}
+            },
+            methods:{
+                clickCount:function () {
+                    this.vueCount=this.count
+                }
+            },
+            template:`<button @click="clickCount">{{vueCount}}</button>`
+        }
+    }
+
+    });
+</script>
+</html>
